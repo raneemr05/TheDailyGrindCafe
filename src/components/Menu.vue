@@ -1,5 +1,5 @@
+<!-- List rendering using v-for -->
 <script setup>
-
 const menuItems = [
     {id: 1, name:'Cappuccino', price: 4.5, img: 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/cappucino-32dbfba.jpg' },
     {id: 2, name: 'Espresso', price: 3.0, img: 'https://www.tasteofhome.com/wp-content/uploads/2023/03/TOH-espresso-GettyImages-1291298315-JVcrop.jpg' },
@@ -15,7 +15,7 @@ console.log(menuItems);
     <!-- using v-for directive to display the items  -->
     <ul>
         <li v-for="item in menuItems" :key="item.id">
-            <img v-bind:src="item.img" v-bind:alt="item.name" class="menu-image">
+            <img :src="item.img" :alt="item.name" class="menu-image">
             <div class="item-description">
                 <!-- Text Interpolation - to access a variable from the script and use it in template -->
                 {{ item.name }} <br>  ${{ item.price }}
