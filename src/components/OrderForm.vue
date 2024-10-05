@@ -1,17 +1,35 @@
 <script setup>
+import { reactive, ref } from 'vue';
+
+// Creates a reactive form object
+const orderForm = reactive({
+    name: '',
+    coffee: '',
+    milk: '',
+    sugar: false
+});
+
+//Function to handle the form submission
+const submitOrder = () =>{
+    formSubmitted.value = true;
+    console.log('Order Submitted: ', orderForm);
+}
+
+// Boolean to check if the formSubmitted
+const formSubmitted = ref(false);
+
 </script>
 
 <template>
     <div class="container">
         <h2> Order Your Coffee Now </h2>
-        <form>
+        <form @submit.prevent="submitOrder">
             <!-- Name Input -->
             <label for="name">Your Name:</label>
-            <input type="text" id="name" placeholder="Enter your name">
-
+            <input type="text" v-model="orderForm.name" id="name" placeholder="Enter your name">
             <!-- Dropdown (Coffee Selection)-->
              <label for="coffee"> Choose Your Coffee: </label>
-             <select id="coffee">
+             <select id="coffee" v-model="orderForm.coffee">
                 <option value=""> </option>
                 <option>Cappuccino</option>
                 <option>Latte</option>
@@ -21,25 +39,33 @@
              <!-- Milk Preference (Radio Buttons)-->
               <label for="milk"> Milk Preference: </label>
               <label>
-              <input type="radio" value="Whole Milk"> Whole Milk
+              <input type="radio" v-model="orderForm.milk" value="Whole Milk"> Whole Milk
               </label>
               <label>
-              <input type="radio" value="Skim Milk"> Skim Milk
+              <input type="radio" v-model="orderForm.milk" value="Skim Milk"> Skim Milk
             </label>
             <label>
-              <input type="radio" value="Almond Milk"> Almond Milk
+              <input type="radio" v-model="orderForm.milk" value="Almond Milk"> Almond Milk
             </label>
 
               <!-- Extras: (Checkbox) -->
                <label for="extras"> Extras: </label>
                <label>
-               <input type="checkbox"> Extra Sugar
+               <input type="checkbox" v-model="orderForm.sugar"> Extra Sugar
             </label>
 
                <!-- Submit button -->
                <button type="submit">Order Now</button>
         </form>
 
+        <!-- Order Summary to be visible after the form is submitted -->
+        <div class="order-summary" v-if="formSubmitted">
+            <h3> Order Summary </h3>
+            <p>Name: {{ orderForm.name }} </p>
+            <p>Coffe Type: {{ orderForm.coffee }} </p>
+            <p>Milk Preference: {{ orderForm.milk }} </p>
+            <p>Extra Sugar: {{ orderForm.sugar ? 'Yes' : 'No' }} </p>
+        </div>
     </div>
 
 </template>
@@ -75,5 +101,11 @@ button{
 
 label, p{
     margin: 10px 0 5px;
+}
+
+.order-summary{
+    margin-top: 20px;
+    padding: 15px;
+    text-align: center;
 }
 </style>
