@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
+import SpecialOffer from './SpecialOffer.vue';
 
 // Creates a reactive form object
 const orderForm = reactive({

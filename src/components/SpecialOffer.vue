@@ -6,6 +6,8 @@ const htmlContent = '<u> Freshly brewed coffee, just for you! </u>'
 </script>
 <template>
     <div class="special">
+        <!-- slot with fallback content  - a default content for a parent-->
+        <slot> Our Offers </slot>
         <h3>Special Offer</h3>
         <!-- Using v-html directive -->
         <p v-html="htmlContent"></p>
